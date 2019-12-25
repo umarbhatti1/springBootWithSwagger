@@ -31,5 +31,6 @@ dependencies {
     compileOnly('io.springfox:springfox-swagger-ui:2.9.2')
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
     compileOnly('org.projectlombok:lombok')
+    testCompile group: 'com.h2database', name: 'h2', version: '1.4.194'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
