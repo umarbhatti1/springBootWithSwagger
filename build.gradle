@@ -22,15 +22,15 @@ sourceCompatibility = 1.8
 repositories {
     mavenCentral()
 }
-
+task fatJar(type: Jar) {
+    classifier = 'all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
 
 dependencies {
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE')
-    compileOnly('io.springfox:springfox-swagger2:2.9.2')
-    compileOnly('io.springfox:springfox-swagger-ui:2.9.2')
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
-    compileOnly('org.projectlombok:lombok')
-    testCompile group: 'com.h2database', name: 'h2', version: '1.4.194'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 }
