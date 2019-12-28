@@ -1,0 +1,15 @@
+node{
+    def gradleHome = tool name: 'gradle', type: 'gradle'
+    stage('SCM Checkout'){
+        git credentialsId: 'git-creds', url: 'https://github.com/umarbhatti1/springBootWithSwagger.git'
+    }
+    stage('Build'){
+        sh "${gradleHome}/bin/gradle clean build"
+    }
+       stage('Test'){
+        sh "${gradleHome}/bin/gradle test"
+    }
+       stage('Deploy'){
+        sh 'nohup java -jar /var/jenkins_home/workspace/spring/build/libs/upWorkDemo-0.0.1-SNAPSHOT.jar &'
+    }
+}
